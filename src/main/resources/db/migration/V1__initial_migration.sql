@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS `store_api`.`product` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE);
+
+
+
+
+
+
