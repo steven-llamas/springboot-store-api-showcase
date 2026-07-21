@@ -1,4 +1,4 @@
-package com.store_api_example.store_api;
+package com.store_api_example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

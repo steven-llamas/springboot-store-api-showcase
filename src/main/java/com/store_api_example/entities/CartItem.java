@@ -1,9 +1,10 @@
-package entities;
+package com.store_api_example.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -24,5 +25,5 @@ public class CartItem {
     private Product product;
 
     @Column(name = "quantity")
-    private Integer quantity;
+    private Long quantity;
 }

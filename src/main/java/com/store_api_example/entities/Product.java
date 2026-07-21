@@ -1,4 +1,4 @@
-package entities;
+package com.store_api_example.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;
