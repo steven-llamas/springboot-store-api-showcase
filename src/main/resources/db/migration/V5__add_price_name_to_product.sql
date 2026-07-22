@@ -1,0 +1,3 @@
+ALTER TABLE `store_api`.`product`
+ADD COLUMN `name`   VARCHAR(255) NOT NULL AFTER `id`,
+ADD COLUMN `price`  DECIMAL(19,2) NOT NULL DEFAULT 0.0 AFTER `name`;
