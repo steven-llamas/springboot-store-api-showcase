@@ -2,6 +2,7 @@ package com.store_api_example.controllers;
 
 import com.store_api_example.dtos.AddItemToCartRequest;
 import com.store_api_example.dtos.CartDto;
+import com.store_api_example.dtos.CartItemDto;
 import com.store_api_example.entities.Cart;
 import com.store_api_example.entities.CartItem;
 import com.store_api_example.entities.Product;
@@ -9,6 +10,7 @@ import com.store_api_example.mappers.ICartMapper;
 import com.store_api_example.repositories.CartRepository;
 import com.store_api_example.repositories.ProductRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -37,7 +39,7 @@ public class CartController {
     }
 
     @PostMapping("/{cartId}/items")
-    public ResponseEntity<CartDto> updateCart(
+    public ResponseEntity<CartItemDto> updateCart(
             @PathVariable(name = "cartId") final UUID cartId,
             @RequestBody final AddItemToCartRequest request) {
         final var cart    = cartRepository.findById(cartId).orElse(null);
@@ -57,7 +59,8 @@ public class CartController {
                 .orElse(null);
 
         if (cartItem != null) {
-            cartItem.setQuantity(cartItem.getQuantity() + 1);
+            final var qty = cartItem.getQuantity() + 1L;
+            cartItem.setQuantity(qty);
         } else {
             cartItem = new CartItem();
             cartItem.setProduct(product);
@@ -67,7 +70,10 @@ public class CartController {
         }
 
         cartRepository.save(cart);
-        return  ResponseEntity.ok(null);
+
+        final CartItemDto cartItemDto = cartMapper.toDto(cartItem);
+
+        return  ResponseEntity.status(HttpStatus.CREATED).body(cartItemDto);
     }
 
 }
