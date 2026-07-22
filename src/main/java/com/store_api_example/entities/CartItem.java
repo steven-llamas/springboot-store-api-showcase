@@ -26,4 +26,9 @@ public class CartItem {
 
     @Column(name = "quantity")
     private Long quantity;
+
+    public BigDecimal getTotalPrice() {
+        return product.getPrice().multiply(BigDecimal.valueOf(quantity));
+    }
+
 }
